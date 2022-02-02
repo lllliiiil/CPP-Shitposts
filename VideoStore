@@ -1,0 +1,64 @@
+#include <iostream>
+#include <cstdlib>
+#include <limits>
+#include <vector>
+#include <sstream>
+#include <numeric>
+#include <ctime>
+#include <cmath>
+
+using namespace std;
+
+
+string GenerateString(int key = 0) // by default genrerates Film name
+{
+	string filmName1[] = { "The ", "Father ","Mother ","Doughter ","Son "," Dog ","Cat ", "Bird ", "Film ","Game ","Book ","Girl ","Boy ","Shit ","Lord ","Box ","Fight ","Papper ","Army ","Matter ","Grass ","Wind ","Rock ","Music ","Notes ","Water ", "Fire ","Earth ","Human ","Men ","Women "," Something ","Doll ","Teddybear ","Bear","Deer ","Ah"};
+	string filmName2[] = { "", "of father ","of mother ","of doughter ","of son "," of dog ","of cat ", "of bird ", "of film ","of game ","of book ","of girl ","of boy ","of shit ","of lord ","of box ","of fight ","of papper ","of army ","of matter ","of grass ","of wind ","of rock ","of music ","of notes ","of water ", "of fire ","of earth ","of human ","of men ","of women ","of something ","of doll ","of teddybear ","of bear","of deer ","of ah" };
+	string genres[] = { "Horror ", "Action ","Romance ","Drama ","Everyday ","Comedy ","Fantasy ","Science Fiction ","Musical ","Western ","SciFi ","Cyberpunk ","Violence ","Body-Horror ","Phylosophy ","Classic ","Documentory " };
+	string directorPName[] = { "Jhon ", "Isaac ", "Dick ", "Rick ","Adam ","Steven ","Bob ","Sam ","James ","Mary ","Patricia ","Jennifer ","Michael ","Linda ","William ","Elisabeth ","David ","Barbara ","Richard ","Susan " };
+	string directorGenName[] = { "Jhonson","Clarc","Dickson","Sanches","Sandler","Stevenson","Kin","Simpson","Smith","Numer","Adamson","Ghotam","Stroff","Someson","Thisson","Theyson" };
+
+
+	if (key == 1)
+	{
+		return directorPName[rand() % 19] + directorGenName[rand() % 15];
+	}
+	else if (key == 2)
+	{
+		int size = rand() % 16, usedgenres = 0; 
+		string outputedString;
+		for (int i = 0; i < size; i++)
+		{
+			outputedString += genres[i];
+		}
+		return outputedString;
+	}
+
+
+	return filmName1[rand() % 36] + filmName2[rand() % 36];
+}
+
+string SearchAlgorythm(string WordToFind, int SortBy)
+{
+	return "ss";
+}
+struct VideoStore
+{
+	string filmname = GenerateString(0);
+	string director = GenerateString(1);
+	string genre = GenerateString(2);
+	short int rating = rand()%100;
+	float price = rand() % 100 * 0.1;
+};
+
+int main(int argc, char** argv)
+{
+	VideoStore soe, poe, doe;
+	
+	srand(time(NULL));
+
+
+	
+
+	return 0;
+}
