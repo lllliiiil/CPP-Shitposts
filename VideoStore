@@ -1,104 +1,86 @@
 #include <iostream>
-#include <cstdlib>
-#include <limits>
-#include <vector>
-#include <sstream>
-#include <numeric>
-#include <ctime>
-#include <cmath>
+#include <string>
+#include <algorithm>
+#include <io.h>
+#include <fcntl.h>
+#include <Windows.h>
+#include <time.h>
+
+//std::wcout << L" ┌ ─ ┐ │ └ ┘ ├ ┤ ┬ ┴ ┼ "<<std::endl;
+
 
 using namespace std;
-
-
-string GenerateString(int key = 0) // by default genrerates Film name
+void something(int** array, const int rows, const int colomns)
 {
-	string filmName1[] = { "The ", "Father ","Mother ","Doughter ","Son "," Dog ","Cat ", "Bird ", "Film ","Game ","Book ","Girl ","Boy ","Shit ","Lord ","Box ","Fight ","Papper ","Army ","Matter ","Grass ","Wind ","Rock ","Music ","Notes ","Water ", "Fire ","Earth ","Human ","Men ","Women "," Something ","Doll ","Teddybear ","Bear","Deer ","Ah"};
-	string filmName2[] = { "", "of father ","of mother ","of doughter ","of son "," of dog ","of cat ", "of bird ", "of film ","of game ","of book ","of girl ","of boy ","of shit ","of lord ","of box ","of fight ","of papper ","of army ","of matter ","of grass ","of wind ","of rock ","of music ","of notes ","of water ", "of fire ","of earth ","of human ","of men ","of women ","of something ","of doll ","of teddybear ","of bear","of deer ","of ah" };
-	string genres[] = { "Horror ", "Action ","Romance ","Drama ","Everyday ","Comedy ","Fantasy ","Science Fiction ","Musical ","Western ","SciFi ","Cyberpunk ","Violence ","Body-Horror ","Phylosophy ","Classic ","Documentory " };
-	string directorPName[] = { "Jhon ", "Isaac ", "Dick ", "Rick ","Adam ","Steven ","Bob ","Sam ","James ","Mary ","Patricia ","Jennifer ","Michael ","Linda ","William ","Elisabeth ","David ","Barbara ","Richard ","Susan " };
-	string directorGenName[] = { "Jhonson","Clarc","Dickson","Sanches","Sandler","Stevenson","Kin","Simpson","Smith","Numer","Adamson","Ghotam","Stroff","Someson","Thisson","Theyson" };
-
-
-	if (key == 1)
+	for (int i = 0; i < rows; i++)
 	{
-		return directorPName[rand() % 19] + directorGenName[rand() % 15];
-	}
-	else if (key == 2)
-	{
-		int size = rand() % 16, usedgenres = 0; 
-		string outputedString;
-		for (int i = 0; i < size; i++)
+		for (int j = 0; j < colomns; j++)
 		{
-			outputedString += genres[i];
-		}
-		return outputedString;
+			array[i][j] = rand() % 20;
+			cout << array[i][j] << ' ';
+
+		}cout << endl;
 	}
 
 
-	return filmName1[rand() % 36] + filmName2[rand() % 36];
+
+	bool isDeleteRow = false;
+	int zerosCount = 0, rightEnd = colomns;
+	int* rwsToDelete = new int[];
+
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < colomns; j++)
+		{
+			if (array[i][j] == 0)
+			{
+				zerosCount++;
+				swap(array[i][j], array[i][rightEnd]);
+				for (int i = 0; i < rightEnd - j; i++)
+				{
+					swap(array[i][j], array[i][j + 1]);
+				}
+			}
+
+
+		}
+	}
+	int** additionalArray = new int* [4];
+	for (int i = 0; i < 4; i++)
+	{
+		additionalArray[i] = new int[];
+	}
 }
 
-//void SortBy(VideoStore film[], int sizeOfArray, char byMost)
-//{
-//	if (byMost == 'p' || byMost == 'P')
-//	{
-//		for (int startIndex = 0; startIndex < sizeOfArray - 1; ++startIndex)
-//		{
-//			int smallestIndex = startIndex;
-//			for (int currentIndex = startIndex + 1; currentIndex < sizeOfArray; ++currentIndex)
-//			{
-//				if (film[currentIndex].price < film[smallestIndex].price)
-//					smallestIndex = currentIndex;
-//			}
-//
-//			std::swap(film[startIndex], film[smallestIndex]);
-//		}
-//	}
-//	else if (byMost == 'r'||byMost=='R')
-//	{
-//		for (int startIndex = 0; startIndex < sizeOfArray - 1; ++startIndex)
-//		{
-//			int smallestIndex = startIndex;
-//			for (int currentIndex = startIndex + 1; currentIndex < sizeOfArray; ++currentIndex)
-//			{
-//				if (film[currentIndex].rating < film[smallestIndex].rating)
-//					smallestIndex = currentIndex;
-//			}
-//
-//			std::swap(film[startIndex], film[smallestIndex]);
-//		}
-//	}
-//}
-//void SearchBy(VideoStore film[], int sizeOfArray)
-//{
-//
-//}
-struct VideoStore
+int main()
 {
-	string filmname = GenerateString(0);
-	string director = GenerateString(1);
-	string genre = GenerateString(2);
-	int rating = rand()%100;
-	float price = rand() % 100 * 0.1f;
-};
-
-int main(int argc, char** argv)
-{
-
+	//_setmode(_fileno(stdout), _O_U16TEXT);
 	srand(time(NULL));
-	VideoStore films[12];
-	int filmArraySize = sizeof(films) / sizeof(films[0]);
 
-	for (int i = 0; i < filmArraySize; i++)
+
+	int** array = new int* [4];
+	for (int i = 0; i < 4; i++)
 	{
-		cout << films[i].filmname << endl;
-		cout << films[i].director << endl;
-		cout << films[i].genre << endl;
-		cout << films[i].rating << endl;
-		cout << films[i].price << endl;
-
-		cout << i << "-=========================================" << endl;
+		array[i] = new int[5];
 	}
+
+	something(array, 4, 5);
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			cout << array[i][j] << ' ';
+
+		}cout << endl;
+	}
+
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	delete[] array[i];
+	//}
+	//delete[] array;
+
 
 	return 0;
-}
+} 
